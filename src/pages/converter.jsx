@@ -1,9 +1,11 @@
+import { TextH1 } from "../components/text";
+
 export function Converter() {
   return (
     <>
-      <h1 className="flex text-4xl justify-center items-center text-black ">
-        Convertere
-      </h1>
+      <div className="flex h-screen items-center justify-center">
+        <TextH1 text="Converter" />
+      </div>
     </>
   );
 }

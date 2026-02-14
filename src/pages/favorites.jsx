@@ -1,7 +1,11 @@
+import { TextH1 } from "../components/text";
+
 export function Favorites() {
   return (
     <>
-      <h1 className="flex text-4xl justify-center text-black ">Favorites</h1>
+      <div className="flex h-screen items-center justify-center">
+        <TextH1 text="Favoritos" />
+      </div>
     </>
   );
 }
