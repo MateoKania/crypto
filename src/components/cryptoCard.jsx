@@ -15,7 +15,7 @@ export function CryptoCard({
   return (
     <li
       key={id}
-      className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px] items-center justify-items-end gap-x-4 p-2  border-b-2  transition-colors duration-200 bg-gray-200 hover:bg-gray-300 "
+      className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px] items-center justify-items-end gap-x-4 p-2  hover:-translate-y-0.5  transition-all duration-200 border border-gray-300 bg-gray-100 hover:bg-gray-300 "
     >
       <img src={image} alt={name} />
       <p className="ml-4 justify-self-start font-semibold">{name}</p>

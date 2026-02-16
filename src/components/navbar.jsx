@@ -13,6 +13,14 @@ export function Navbar() {
           Mercado
         </NavLink>
         <NavLink
+          to="/grafics"
+          className={({ isActive }) =>
+            isActive ? "text-blue-500 font-bold" : "hover:scale-110"
+          }
+        >
+          Graficas
+        </NavLink>
+        <NavLink
           to="/favs"
           className={({ isActive }) =>
             isActive ? "text-blue-500 font-bold" : "hover:scale-110"

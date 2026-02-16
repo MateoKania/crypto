@@ -23,7 +23,8 @@ export function Home() {
           text="Top Cryptos"
           className="mb-10 flex text-center text-3xl font-bold"
         />
-        <div className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px] items-center justify-items-end gap-x-4 w-full p-2 text-sm font-semibold uppercase  border-b-2">
+
+        <div className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px] items-center justify-items-end gap-x-4 w-full p-2 text-sm font-semibold uppercase ">
           <p>#</p>
           <p className="ml-4 justify-self-start">Name</p>
           <p className="justify-self-start">Sym</p>
@@ -32,7 +33,7 @@ export function Home() {
           <p>Market Cap</p>
           <p>Change 24h</p>
         </div>
-        <ul className="flex flex-col w-full rounded-lg ">
+        <ul className="flex flex-col w-full rounded-lg mb-10 ">
           {mockData.map((crypto) => (
             <CryptoCard
               id={crypto.id}
