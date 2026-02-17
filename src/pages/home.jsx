@@ -24,7 +24,7 @@ export function Home() {
           className="mb-10 flex text-center text-3xl font-bold"
         />
 
-        <div className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px] items-center justify-items-end gap-x-4 w-full p-2 text-sm font-semibold uppercase ">
+        <div className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 w-full p-2 text-sm font-semibold uppercase ">
           <p>#</p>
           <p className="ml-4 justify-self-start">Name</p>
           <p className="justify-self-start">Sym</p>
@@ -32,6 +32,7 @@ export function Home() {
           <p>Volume</p>
           <p>Market Cap</p>
           <p>Change 24h</p>
+          <p>Favoritos</p>
         </div>
         <ul className="flex flex-col w-full rounded-lg mb-10 ">
           {mockData.map((crypto) => (

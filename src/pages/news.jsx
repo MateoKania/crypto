@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { CryptoNewsCard } from "../components/cryptoNews";
-import { newsApi } from "../services/cryptoApi";
+// import { newsApi } from "../services/cryptoApi";
 import { TextH1 } from "../components/text";
+import { newsMock } from "../mocks/mookNews";
 
 export function News() {
   const [news, setNews] = useState([]);
@@ -16,7 +17,7 @@ export function News() {
       setError("");
 
       try {
-        const response = await newsApi();
+        const response = await newsMock;
         const newsList = Array.isArray(response?.Data) ? response.Data : [];
 
         const normalizedNews = newsList.map((item) => ({

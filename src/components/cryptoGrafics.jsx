@@ -20,7 +20,7 @@ const Gradient = () => {
   );
 };
 
-export const AreaChartFillByValue = () => {
+export const AreaChartFillByValue = ({ cryptoId = "bitcoin" }) => {
   const [chartData, setChartData] = useState([]);
   const [days, setDays] = useState(7);
   const [loading, setLoading] = useState(true);
@@ -50,7 +50,7 @@ export const AreaChartFillByValue = () => {
     }
 
     loadChartData();
-  }, [days]);
+  }, [days, cryptoId]);
   if (loading) {
     return <p>Cargando gráfica...</p>;
   }
