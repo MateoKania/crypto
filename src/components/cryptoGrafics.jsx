@@ -5,9 +5,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 import { useState, useEffect } from "react";
-import { mockData } from "../mocks/mookGrafics";
+import { chartMocksByCryptoDays } from "../mocks/mockGrafics";
 
 const Gradient = () => {
   return (
@@ -20,11 +21,13 @@ const Gradient = () => {
   );
 };
 
-export const AreaChartFillByValue = ({ cryptoId = "bitcoin" }) => {
+export const AreaChartFillByValue = ({ cryptoId }) => {
   const [chartData, setChartData] = useState([]);
   const [days, setDays] = useState(7);
   const [loading, setLoading] = useState(true);
-  const [selectedCrypto, setSelectedCrypto] = useState("bitcoin");
+  const [selectedCrypto, setSelectedCrypto] = useState(cryptoId || "bitcoin");
+  const isFixedCrypto = Boolean(cryptoId);
+  const activeCrypto = cryptoId || selectedCrypto;
   const cryptos = [
     { id: "bitcoin", name: "Bitcoin" },
     { id: "ethereum", name: "Ethereum" },
@@ -37,10 +40,16 @@ export const AreaChartFillByValue = ({ cryptoId = "bitcoin" }) => {
     function loadChartData() {
       setLoading(true);
 
-      const formattedData = mockData.prices.map(([timestamp, price]) => ({
+      const mockSeries =
+        chartMocksByCryptoDays[activeCrypto]?.[days] ||
+        chartMocksByCryptoDays.bitcoin?.[7] ||
+        [];
+
+      const formattedData = mockSeries.map(([timestamp, price]) => ({
         time: new Date(timestamp).toLocaleDateString("en-US", {
-          month: "short",
+          month: days === 1 ? undefined : "short",
           day: "numeric",
+          hour: days === 1 ? "2-digit" : undefined,
         }),
         price: price,
       }));
@@ -50,7 +59,7 @@ export const AreaChartFillByValue = ({ cryptoId = "bitcoin" }) => {
     }
 
     loadChartData();
-  }, [days, cryptoId]);
+  }, [activeCrypto, days]);
   if (loading) {
     return <p>Cargando gráfica...</p>;
   }
@@ -61,23 +70,25 @@ export const AreaChartFillByValue = ({ cryptoId = "bitcoin" }) => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
-      <div className="flex gap-2 mb-4 flex-wrap justify-center">
-        {cryptos.map((crypto) => (
-          <button
-            key={crypto.id}
-            onClick={() => setSelectedCrypto(crypto.id)}
-            className={`px-4 py-2 rounded ${
-              selectedCrypto === crypto.id
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
-            }`}
-          >
-            {crypto.name}
-          </button>
-        ))}
-      </div>
+      {!isFixedCrypto && (
+        <div className="flex gap-2 mb-4 flex-wrap justify-center">
+          {cryptos.map((crypto) => (
+            <button
+              key={crypto.id}
+              onClick={() => setSelectedCrypto(crypto.id)}
+              className={`px-4 py-2 rounded ${
+                activeCrypto === crypto.id
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200"
+              }`}
+            >
+              {crypto.name}
+            </button>
+          ))}
+        </div>
+      )}
 
-      <div className="flex gap-2 mb-4 justify-center">
+      <div className="mb-4 flex flex-wrap justify-center gap-2">
         <button
           onClick={() => setDays(1)}
           className={`px-4 py-2 rounded ${
@@ -112,41 +123,38 @@ export const AreaChartFillByValue = ({ cryptoId = "bitcoin" }) => {
         </button>
       </div>
 
-      <AreaChart
-        className="mx-auto"
-        style={{
-          width: "100%",
-          maxWidth: "700px",
-          maxHeight: "70vh",
-          aspectRatio: 1.618,
-        }}
-        data={chartData}
-        margin={{
-          top: 10,
-          right: 0,
-          left: 0,
-          bottom: 0,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="time" />
-        <YAxis width="auto" />
-        <Tooltip
-          formatter={(value) =>
-            `$${value.toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}`
-          }
-        />
-        <Gradient chartData={chartData} />
-        <Area
-          type="monotone"
-          dataKey="price"
-          stroke="#000"
-          fill="url(#splitColor)"
-        />
-      </AreaChart>
+      <div className="mx-auto h-[300px] w-full max-w-[700px] sm:h-[360px] md:h-[420px]">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={chartData}
+            margin={{
+              top: 10,
+              right: 0,
+              left: 0,
+              bottom: 0,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="time" />
+            <YAxis width="auto" />
+            <Tooltip
+              formatter={(value) =>
+                `$${value.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`
+              }
+            />
+            <Gradient chartData={chartData} />
+            <Area
+              type="monotone"
+              dataKey="price"
+              stroke="#000"
+              fill="url(#splitColor)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

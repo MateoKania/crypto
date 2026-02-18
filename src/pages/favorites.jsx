@@ -13,7 +13,7 @@
 import { TextH1 } from "../components/text";
 import { CryptoCard } from "../components/cryptoCard";
 import { useFavorites } from "../context/useContext";
-import { mockData } from "../mocks/mook";
+import { mockData } from "../mocks/mock";
 import { AreaChartFillByValue } from "../components/cryptoGrafics";
 
 export function Favorites() {
@@ -24,19 +24,19 @@ export function Favorites() {
   );
 
   return (
-    <div className="flex flex-col h-auto mt-20 items-center justify-center w-9/12 mx-auto">
+    <div className="mx-auto mt-20 flex h-auto w-full max-w-7xl flex-col items-center justify-center px-3 sm:px-4 md:w-11/12">
       <TextH1
         text="Mis Favoritas"
-        className="mb-10 flex text-center text-3xl font-bold"
+        className="mb-6 flex text-center text-2xl font-bold sm:mb-8 md:mb-10 md:text-3xl"
       />
 
       {favoriteCryptos.length === 0 ? (
-        <p className="text-gray-500 text-lg">
-          No tienes favoritas aún. Añade algunas desde el mercado ⭐
+        <p className="text-center text-base text-gray-500 sm:text-lg">
+          No tienes favoritas aún. Añade algunas desde el mercado
         </p>
       ) : (
         <>
-          <div className="grid grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 w-full p-2 text-sm font-semibold uppercase">
+          <div className="hidden w-full grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 p-2 text-sm font-semibold uppercase md:grid">
             <p>#</p>
             <p className="ml-4 justify-self-start">Name</p>
             <p className="justify-self-start">Sym</p>
@@ -46,7 +46,7 @@ export function Favorites() {
             <p>Change 24h</p>
             <p>Favoritos</p>
           </div>
-          <ul className="flex flex-col w-full rounded-lg mb-10">
+          <ul className="mb-8 flex w-full flex-col gap-3 rounded-lg md:mb-10 md:gap-0">
             {favoriteCryptos.map((crypto) => (
               <CryptoCard
                 key={crypto.id}
@@ -62,13 +62,13 @@ export function Favorites() {
             ))}
           </ul>
 
-          <div className="w-full space-y-8 mt-10">
+          <div className="mt-6 w-full space-y-6 sm:space-y-8 md:mt-10">
             {favoriteCryptos.map((crypto) => (
               <div
                 key={`chart-${crypto.id}`}
-                className="border-2 border-gray-300 rounded-lg p-4"
+                className="rounded-lg border-2 border-gray-300 p-3 sm:p-4"
               >
-                <h2 className="text-2xl font-bold mb-4 text-center">
+                <h2 className="mb-3 text-center text-xl font-bold sm:mb-4 sm:text-2xl">
                   {crypto.name} ({crypto.symbol.toUpperCase()})
                 </h2>
                 <AreaChartFillByValue cryptoId={crypto.id} />

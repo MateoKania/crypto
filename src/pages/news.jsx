@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CryptoNewsCard } from "../components/cryptoNews";
 // import { newsApi } from "../services/cryptoApi";
 import { TextH1 } from "../components/text";
-import { newsMock } from "../mocks/mookNews";
+import { newsMock } from "../mocks/mockNews";
 
 export function News() {
   const [news, setNews] = useState([]);
@@ -54,8 +54,11 @@ export function News() {
   }, []);
 
   return (
-    <section className="mx-auto mt-20 mb-10 w-11/12 max-w-6xl">
-      <TextH1 text="Noticias Crypto" className="mb-8 text-3xl font-bold" />
+    <section className="mx-auto mb-10 mt-20 w-full max-w-6xl px-3 sm:px-4 md:w-11/12">
+      <TextH1
+        text="Noticias Crypto"
+        className="mb-6 text-2xl font-bold sm:mb-8 md:text-3xl"
+      />
 
       {loading ? (
         <p className="rounded-xl border border-gray-300 bg-gray-100 p-6 text-center text-gray-700">

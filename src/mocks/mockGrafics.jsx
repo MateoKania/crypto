@@ -1,3 +1,5 @@
+import { mockData as marketMockData } from "./mock";
+
 export const mockData = {
   prices: [
     [1770656658213, 70052.90697154785],
@@ -513,3 +515,92 @@ export const mockData = {
     [1771260371000, 42280506162.29846],
   ],
 };
+
+const DAY_POINTS = {
+  1: 24,
+  7: 84,
+  30: 120,
+  365: 172,
+};
+
+const PROFILE_OVERRIDES = {
+  bitcoin: { basePrice: 68000, beta: 0.9, noise: 0.008 },
+  ethereum: { basePrice: 3400, beta: 1.15, noise: 0.012 },
+  tether: { basePrice: 1, beta: 0.04, noise: 0.0015 },
+  binancecoin: { basePrice: 590, beta: 0.95, noise: 0.01 },
+  solana: { basePrice: 145, beta: 1.35, noise: 0.018 },
+};
+
+const STABLE_KEYWORDS = ["usd", "tether", "usdt", "usdc", "dai"];
+
+function isStableCoin(crypto) {
+  const id = crypto.id?.toLowerCase() || "";
+  const symbol = crypto.symbol?.toLowerCase() || "";
+  return STABLE_KEYWORDS.some(
+    (keyword) => id.includes(keyword) || symbol.includes(keyword)
+  );
+}
+
+const CRYPTO_PROFILES = {
+  ...marketMockData.reduce((acc, crypto) => {
+    const basePrice = Number(crypto.current_price) || 1;
+    const dailyChange = Math.abs(
+      Number(crypto.price_change_percentage_24h) || 0
+    );
+    const stableCoin = isStableCoin(crypto);
+
+    acc[crypto.id] = {
+      basePrice,
+      beta: stableCoin ? 0.03 : Math.min(1.6, 0.65 + dailyChange / 8),
+      noise: stableCoin ? 0.001 : Math.min(0.02, 0.004 + dailyChange / 1200),
+    };
+
+    return acc;
+  }, {}),
+  ...PROFILE_OVERRIDES,
+};
+
+const basePrices = mockData.prices;
+
+function sampleSeries(points, targetCount) {
+  if (targetCount >= points.length) {
+    return points;
+  }
+
+  const start = points.length - targetCount;
+  return points.slice(start);
+}
+
+function buildSeriesForCrypto(points, profile) {
+  const baseReference = points[0]?.[1] || 1;
+
+  return points.map(([timestamp, price], index) => {
+    const relativeMove = (price - baseReference) / baseReference;
+    const wave = Math.sin(index / 6) * profile.noise;
+
+    let nextPrice =
+      profile.basePrice * (1 + relativeMove * profile.beta + wave);
+
+    if (profile.basePrice === 1) {
+      nextPrice = Math.min(1.02, Math.max(0.98, nextPrice));
+    }
+
+    return [timestamp, Number(nextPrice.toFixed(6))];
+  });
+}
+
+export const chartMocksByCryptoDays = Object.keys(CRYPTO_PROFILES).reduce(
+  (acc, cryptoKey) => {
+    const profile = CRYPTO_PROFILES[cryptoKey];
+
+    acc[cryptoKey] = Object.keys(DAY_POINTS).reduce((dayAcc, dayKey) => {
+      const days = Number(dayKey);
+      const sampledSeries = sampleSeries(basePrices, DAY_POINTS[days]);
+      dayAcc[days] = buildSeriesForCrypto(sampledSeries, profile);
+      return dayAcc;
+    }, {});
+
+    return acc;
+  },
+  {}
+);

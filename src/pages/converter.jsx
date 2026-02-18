@@ -1,10 +1,10 @@
-import { TextH1 } from "../components/text";
+import { Converter } from "../components/converterCrypto";
 
-export function Converter() {
+export function ConverterPage() {
   return (
     <>
-      <div className="flex h-screen items-center justify-center">
-        <TextH1 text="Converter" />
+      <div className="flex min-h-screen items-center justify-center px-3 pb-6 pt-20 sm:px-4">
+        <Converter />
       </div>
     </>
   );

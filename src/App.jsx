@@ -5,7 +5,7 @@ import { Favorites } from "./pages/favorites";
 import { Grafics } from "./pages/grafics";
 import { Navbar } from "./components/navbar";
 import { News } from "./pages/news";
-import { Converter } from "./pages/converter";
+import { ConverterPage } from "./pages/converter";
 import { FavoritesProvider } from "./context/useContext";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path="/grafics" element={<Grafics />} />
           <Route path="/favs" element={<Favorites />} />
           <Route path="/news" element={<News />} />
-          <Route path="/converter" element={<Converter />} />
+          <Route path="/converter" element={<ConverterPage />} />
         </Routes>
       </FavoritesProvider>
     </>
