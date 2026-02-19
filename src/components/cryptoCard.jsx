@@ -1,5 +1,4 @@
 import { formatter } from "../utils/formatNumbers";
-// import { useState } from "react";
 import estrellaVacia from "../assets/estrellaVacia.png";
 import estrellaAmarilla from "../assets/estrellaAmarilla.png";
 import { useFavorites } from "../context/useContext";

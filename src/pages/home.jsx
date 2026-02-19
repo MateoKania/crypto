@@ -1,20 +1,19 @@
 import { TextH1 } from "../components/text";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { CryptoCard } from "../components/cryptoCard";
-// import { getTopCryptos } from "../services/cryptoApi";
-// import { useState } from "react";
-import { mockData } from "../mocks/mock";
+import { useState } from "react";
+import { keepInfo } from "../services/cache";
 
 export function Home() {
-  // const [crypto, setCrypto] = useState([]);
+  const [crypto, setCrypto] = useState([]);
 
-  // useEffect(() => {
-  //   async function loadCryptos() {
-  //     const data = await getTopCryptos();
-  //     setCrypto(data);
-  //   }
-  //   loadCryptos();
-  // }, []);
+  useEffect(() => {
+    async function loadCryptos() {
+      const data = await keepInfo();
+      setCrypto(data);
+    }
+    loadCryptos();
+  }, []);
 
   return (
     <>
@@ -37,7 +36,7 @@ export function Home() {
           </div>
 
           <ul className="mb-10 flex w-full flex-col gap-3 rounded-lg md:gap-0">
-            {mockData.map((crypto) => (
+            {crypto.map((crypto) => (
               <CryptoCard
                 key={crypto.id}
                 id={crypto.id}

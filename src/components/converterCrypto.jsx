@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-// import { mockPrices } from "../mocks/mockPrices";
-import { priceApi } from "../services/priceApi";
 import { formatterCrypto } from "../utils/formatNumbers";
 import { TextH1 } from "../components/text";
+import { keepPrice } from "../services/cache";
 
 export function Converter() {
-  // const prices = priceApi();
-
   const [input, setInput] = useState(1);
   const [convertApi, setConvertApi] = useState({});
   const [priceFrom, setPriceFrom] = useState(0);
@@ -15,7 +12,7 @@ export function Converter() {
   useEffect(() => {
     async function loadPrices() {
       try {
-        const response = await priceApi();
+        const response = await keepPrice();
         setConvertApi(response);
         setPriceFrom(response.bitcoin.usd);
         setAmountOf(response.usd.usd);
@@ -62,14 +59,11 @@ export function Converter() {
           <select
             className="h-10 w-full rounded-2xl border border-gray-300 bg-white px-2 text-center md:w-52"
             onChange={selectCrypto}
+            defaultValue="bitcoin"
           >
             {keys.map((nombre) => {
               return (
-                <option
-                  key={nombre}
-                  value={nombre}
-                  selected={nombre === "bitcoin"}
-                >
+                <option key={nombre} value={nombre}>
                   {nombre}
                 </option>
               );
@@ -88,10 +82,11 @@ export function Converter() {
           <select
             className="h-10 w-full rounded-2xl border border-gray-300 bg-white px-2 text-center md:w-52"
             onChange={selectCrypto2}
+            defaultValue="usd"
           >
             {keys.map((nombre) => {
               return (
-                <option key={nombre} value={nombre} selected={nombre === "usd"}>
+                <option key={nombre} value={nombre}>
                   {nombre}
                 </option>
               );

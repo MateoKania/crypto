@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useState, useEffect } from "react";
-import { chartMocksByCryptoDays } from "../mocks/mockGrafics";
+import { keepHistory } from "../services/cache";
 
 const Gradient = () => {
   return (
@@ -37,13 +37,11 @@ export const AreaChartFillByValue = ({ cryptoId }) => {
   ];
 
   useEffect(() => {
-    function loadChartData() {
+    async function loadChartData() {
       setLoading(true);
 
-      const mockSeries =
-        chartMocksByCryptoDays[activeCrypto]?.[days] ||
-        chartMocksByCryptoDays.bitcoin?.[7] ||
-        [];
+      const history = await keepHistory(activeCrypto, days);
+      const mockSeries = history.prices;
 
       const formattedData = mockSeries.map(([timestamp, price]) => ({
         time: new Date(timestamp).toLocaleDateString("en-US", {

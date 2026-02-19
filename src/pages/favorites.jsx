@@ -1,27 +1,23 @@
-// import { TextH1 } from "../components/text";
-
-// export function Favorites() {
-//   return (
-//     <>
-//       <div className="flex h-screen items-center justify-center">
-//         <TextH1 text="Favoritos" />
-//       </div>
-//     </>
-//   );
-// }
-
 import { TextH1 } from "../components/text";
 import { CryptoCard } from "../components/cryptoCard";
 import { useFavorites } from "../context/useContext";
-import { mockData } from "../mocks/mock";
+import { keepInfo } from "../services/cache";
 import { AreaChartFillByValue } from "../components/cryptoGrafics";
+import { useEffect, useState } from "react";
 
 export function Favorites() {
   const { favorites } = useFavorites();
+  const [favoriteCryptos, setFavoriteCryptos] = useState([]);
 
-  const favoriteCryptos = mockData.filter((crypto) =>
-    favorites.includes(crypto.id)
-  );
+  useEffect(() => {
+    async function loadCryptos() {
+      const data = await keepInfo();
+      setFavoriteCryptos(
+        data.filter((crypto) => favorites.includes(crypto.id))
+      );
+    }
+    loadCryptos();
+  }, [favorites]);
 
   return (
     <div className="mx-auto mt-20 flex h-auto w-full max-w-7xl flex-col items-center justify-center px-3 sm:px-4 md:w-11/12">
