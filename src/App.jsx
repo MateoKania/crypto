@@ -7,20 +7,23 @@ import { Navbar } from "./components/navbar";
 import { News } from "./pages/news";
 import { ConverterPage } from "./pages/converter";
 import { FavoritesProvider } from "./context/useContext";
+import { ColorModeProvider } from "./context/useContext";
 
 function App() {
   return (
     <>
       <FavoritesProvider>
-        <Navbar />
+        <ColorModeProvider>
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/grafics" element={<Grafics />} />
-          <Route path="/favs" element={<Favorites />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/converter" element={<ConverterPage />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/grafics" element={<Grafics />} />
+            <Route path="/favs" element={<Favorites />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/converter" element={<ConverterPage />} />
+          </Routes>
+        </ColorModeProvider>
       </FavoritesProvider>
     </>
   );

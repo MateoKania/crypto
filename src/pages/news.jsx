@@ -56,11 +56,11 @@ export function News() {
     <section className="mx-auto mb-10 mt-20 w-full max-w-6xl px-3 sm:px-4 md:w-11/12">
       <TextH1
         text="Noticias Crypto"
-        className="mb-6 text-2xl font-bold sm:mb-8 md:text-3xl"
+        className="text-center mb-6 text-2xl font-bold text-slate-900 dark:text-slate-100 sm:mb-8 md:text-3xl"
       />
 
       {loading ? (
-        <p className="rounded-xl border border-gray-300 bg-gray-100 p-6 text-center text-gray-700">
+        <p className="rounded-xl border border-gray-300 dark:border-slate-700 bg-gray-100 dark:bg-slate-900 p-6 text-center text-gray-700 dark:text-slate-300">
           Cargando noticias...
         </p>
       ) : null}
@@ -88,7 +88,7 @@ export function News() {
       ) : null}
 
       {!loading && !error && news.length === 0 ? (
-        <p className="rounded-xl border border-gray-300 bg-gray-100 p-6 text-center text-gray-700">
+        <p className="rounded-xl border border-gray-300 dark:border-slate-700 bg-gray-100 dark:bg-slate-900 p-6 text-center text-gray-700 dark:text-slate-300">
           No hay noticias disponibles ahora mismo.
         </p>
       ) : null}

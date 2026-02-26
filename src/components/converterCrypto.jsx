@@ -48,23 +48,23 @@ export function Converter() {
   return (
     <>
       {loading ? (
-        <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-700 border-t-transparent"></span>
+        <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 dark:border-cyan-300 border-gray-700 border-t-transparent"></span>
       ) : null}
       {!loading && (
         <div className="flex w-full flex-col items-center justify-center">
           <TextH1
-            className="mb-6 flex items-center justify-center text-center text-3xl text-black sm:mb-8 sm:text-4xl"
             text="Converter Crypto"
+            className="mb-6 flex text-center text-2xl font-bold text-slate-900 dark:text-slate-100 sm:mb-8 md:mb-10 md:text-3xl"
           />
-          <div className="grid w-full max-w-3xl grid-cols-2 gap-3 rounded-2xl border border-gray-300 bg-gray-200 p-4 sm:p-6 md:flex md:flex-row md:items-center md:gap-4">
+          <div className="grid w-full max-w-3xl grid-cols-2 gap-3 rounded-2xl border border-gray-300 dark:border-slate-700 bg-gray-200 dark:bg-slate-900 dark:shadow-[0_14px_40px_rgba(2,6,23,0.5)] p-4 sm:p-6 md:flex md:flex-row md:items-center md:gap-4">
             <input
-              className="h-10 w-full rounded-2xl border border-gray-300 bg-white px-2 text-center"
+              className="h-10 w-full text-black dark:text-slate-100 rounded-2xl border dark:border-slate-600 dark:focus:border-cyan-400 dark:focus:ring-2 dark:focus:ring-cyan-700/40 border-gray-300 bg-white px-2 text-center dark:bg-slate-800"
               type="number"
               value={input}
               onChange={getInput}
             ></input>
             <select
-              className="h-10 w-full rounded-2xl border border-gray-300 bg-white px-2 text-center md:w-52"
+              className="h-10 w-full text-black dark:text-slate-100 rounded-2xl border dark:border-slate-600 dark:focus:border-cyan-400 dark:focus:ring-2 dark:focus:ring-cyan-700/40 border-gray-300 bg-white px-2 text-center md:w-52 dark:bg-slate-800"
               onChange={selectCrypto}
               defaultValue="bitcoin"
             >
@@ -77,7 +77,7 @@ export function Converter() {
               })}
             </select>
 
-            <p className="flex h-10 w-full items-center justify-center rounded-2xl border border-gray-300 bg-white text-center md:w-52">
+            <p className="flex h-10 w-full items-center text-black dark:text-slate-100 justify-center dark:bg-slate-800 rounded-2xl border border-gray-300 dark:border-slate-600 dark:shadow-inner dark:shadow-slate-950/70 bg-white text-center md:w-52">
               {formatterCrypto.format(
                 calculoCrypto({
                   input,
@@ -87,7 +87,7 @@ export function Converter() {
               )}
             </p>
             <select
-              className="h-10 w-full rounded-2xl border border-gray-300 bg-white px-2 text-center md:w-52"
+              className="h-10 w-full text-black dark:text-slate-100 rounded-2xl border dark:border-slate-600 dark:focus:border-cyan-400 dark:focus:ring-2 dark:focus:ring-cyan-700/40 border-gray-300 bg-white px-2 text-center md:w-52 dark:bg-slate-800"
               onChange={selectCrypto2}
               defaultValue="usd"
             >

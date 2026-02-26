@@ -77,7 +77,7 @@ export const AreaChartFillByValue = ({ cryptoId }) => {
               className={`px-4 py-2 rounded ${
                 activeCrypto === crypto.id
                   ? "bg-blue-500 text-white"
-                  : "bg-gray-200"
+                  : "bg-gray-200 dark:bg-gray-700 dark:text-white"
               }`}
             >
               {crypto.name}
@@ -90,7 +90,9 @@ export const AreaChartFillByValue = ({ cryptoId }) => {
         <button
           onClick={() => setDays(1)}
           className={`px-4 py-2 rounded ${
-            days === 1 ? "bg-blue-500 text-white" : "bg-gray-200"
+            days === 1
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 dark:bg-gray-700 dark:text-white"
           }`}
         >
           24H
@@ -98,7 +100,9 @@ export const AreaChartFillByValue = ({ cryptoId }) => {
         <button
           onClick={() => setDays(7)}
           className={`px-4 py-2 rounded ${
-            days === 7 ? "bg-blue-500 text-white" : "bg-gray-200"
+            days === 7
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 dark:bg-gray-700 dark:text-white"
           }`}
         >
           7D
@@ -106,7 +110,9 @@ export const AreaChartFillByValue = ({ cryptoId }) => {
         <button
           onClick={() => setDays(30)}
           className={`px-4 py-2 rounded ${
-            days === 30 ? "bg-blue-500 text-white" : "bg-gray-200"
+            days === 30
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 dark:bg-gray-700 dark:text-white"
           }`}
         >
           30D
@@ -114,7 +120,9 @@ export const AreaChartFillByValue = ({ cryptoId }) => {
         <button
           onClick={() => setDays(365)}
           className={`px-4 py-2 rounded ${
-            days === 365 ? "bg-blue-500 text-white" : "bg-gray-200"
+            days === 365
+              ? "bg-blue-500 text-white"
+              : "bg-gray-200 dark:bg-gray-700 dark:text-white"
           }`}
         >
           1Y

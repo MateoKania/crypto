@@ -20,11 +20,11 @@ export function Home() {
       <div className="mx-auto mt-20 flex h-auto w-full max-w-7xl flex-col items-center justify-center px-3 sm:px-4 md:w-11/12">
         <TextH1
           text="Top Cryptos"
-          className="mb-6 flex text-center text-2xl font-bold sm:mb-8 md:mb-10 md:text-3xl"
+          className="mb-6 flex text-center text-2xl font-bold text-slate-900 dark:text-slate-100 sm:mb-8 md:mb-10 md:text-3xl"
         />
 
         <div className="w-full">
-          <div className="hidden w-full grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 p-2 text-sm font-semibold uppercase md:grid">
+          <div className="hidden w-full grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 rounded-t-xl border border-gray-200 bg-white/90 p-2 text-sm font-semibold uppercase text-slate-700 shadow-sm md:grid dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-300">
             <p>#</p>
             <p className="ml-4 justify-self-start">Name</p>
             <p className="justify-self-start">Sym</p>

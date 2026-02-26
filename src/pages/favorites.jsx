@@ -23,16 +23,16 @@ export function Favorites() {
     <div className="mx-auto mt-20 flex h-auto w-full max-w-7xl flex-col items-center justify-center px-3 sm:px-4 md:w-11/12">
       <TextH1
         text="Mis Favoritas"
-        className="mb-6 flex text-center text-2xl font-bold sm:mb-8 md:mb-10 md:text-3xl"
+        className="mb-6 flex text-center text-2xl font-bold text-slate-900 dark:text-slate-100 sm:mb-8 md:mb-10 md:text-3xl"
       />
 
       {favoriteCryptos.length === 0 ? (
-        <p className="text-center text-base text-gray-500 sm:text-lg">
+        <p className="text-center text-base text-gray-500 dark:text-slate-400 sm:text-lg">
           No tienes favoritas aún. Añade algunas desde el mercado
         </p>
       ) : (
         <>
-          <div className="hidden w-full grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 p-2 text-sm font-semibold uppercase md:grid">
+          <div className="hidden w-full grid-cols-[40px_1fr_100px_120px_180px_180px_120px_120px] items-center justify-items-end gap-x-4 rounded-t-xl border border-gray-200 bg-white/90 p-2 text-sm font-semibold uppercase text-slate-700 shadow-sm md:grid dark:border-slate-700 dark:bg-slate-900/90 dark:text-slate-300">
             <p>#</p>
             <p className="ml-4 justify-self-start">Name</p>
             <p className="justify-self-start">Sym</p>
@@ -62,9 +62,9 @@ export function Favorites() {
             {favoriteCryptos.map((crypto) => (
               <div
                 key={`chart-${crypto.id}`}
-                className="rounded-lg border-2 border-gray-300 p-3 sm:p-4"
+                className="rounded-lg border-2 border-gray-300 dark:border-slate-700 bg-white/80 dark:bg-slate-900/70 p-3 sm:p-4"
               >
-                <h2 className="mb-3 text-center text-xl font-bold sm:mb-4 sm:text-2xl">
+                <h2 className="mb-3 text-center text-xl font-bold text-slate-900 dark:text-slate-100 sm:mb-4 sm:text-2xl">
                   {crypto.name} ({crypto.symbol.toUpperCase()})
                 </h2>
                 <AreaChartFillByValue cryptoId={crypto.id} />
